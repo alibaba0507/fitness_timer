@@ -1,0 +1,318 @@
+<link rel="stylesheet" href="https://darebee.com/templates/darebee/css/added.css" type="text/css">
+
+<!-- link rel="stylesheet" href="https://darebee.com/templates/darebee/css/css8.css" type="text/css" -->
+<style>
+@import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+#timercounter{
+	display: grid;
+}
+/* Timer-related styles */
+#toolbox_wrapper {
+    height: 30px;
+    line-height: 30px;
+    padding: 10px;
+	width:80%;
+}
+
+body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Ensure the body takes the full height of the viewport */
+    margin: 0; /* Remove any default margin on the body */
+}
+/*
+#tools-box {
+    width: 100%; /* Keep it spanning the width of the page */
+    max-width: 600px; /* Optional: Add a max width for better design */
+    text-align: center !important; /* Center-align text inside */
+    color: #666;
+    text-transform: capitalize;
+    padding: 20px; /* Add padding for spacing */
+    background-color: #f8f8f8; /* Optional: Background color */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow */
+    border-radius: 10px; /* Optional: Add rounded corners */
+}
+
+
+#tools-box {
+    display: block;
+    width: 100%; /* Make it span the width of the page */
+    margin: 0 auto; /* Center horizontally */
+    text-align: center !important; /* Center-align text inside */
+    color: #666;
+    text-transform: capitalize;
+    padding: 10px 0; /* Add padding to separate it from other elements */
+    background-color: #f8f8f8; /* Optional: Add a background color for better visibility */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+*/
+.dareStopwatch {
+    display: block;
+    float: none;
+    width: 480px;
+    margin: 0 auto;
+    height: 55px !important;
+    text-align: center;
+    font-family: 'Pathway Gothic One', Arial, sans-serif !important;
+}
+
+#timercounter h1, #time {
+    display: block;
+    /*width: 100px;*/
+    float: left;
+    color: #FFF !important;
+    background: #999;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 40px !important;
+    padding: 0 0 0 15px;
+    margin: 0 2px 0 0 !important;
+    font-family: 'Pathway Gothic One', Arial, sans-serif;
+    color: #141414;
+    text-align: center !important;
+}
+
+#quickbutton1, #quickbutton2, #quickbutton3, #switchTimerBtn {
+    display: inline-block;
+    float: left;
+    width: 99.5%/*px*/;
+    height: 60px;
+    line-height: 40px;
+    border: 1px solid #CCC;
+    text-transform: uppercase;
+    padding: 0;
+    margin: 0 0 0 5px !important;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#breakBtn, #refresh, #pauseBtn, #resumeBtn {
+    display: inline-block;
+    float: right;
+    width: 80px;
+    height: 40px !important;
+    line-height: 40px !important;
+    margin: 0 0 0 5px;
+    background: #CC0000;
+    color: #FFF !important;
+    font-size: 20px;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    font-family: 'Pathway Gothic One', Arial, sans-serif;
+    text-transform: uppercase;
+}
+
+#inputArea {
+    display: inline-block;
+    float: left;
+    width: 90%;
+    height: 40px;
+    line-height: 40px;
+    padding: 0 5px;
+    font-size: 21px;
+    font-weight: bold;
+}
+
+#inputArea input {
+    width: 40%;
+    height: 40px;
+    font-size: 21px;
+    font-family: 'Pathway Gothic One', Arial, sans-serif;
+}
+
+/* Timer quick buttons */
+#quickTimerArea div {
+    text-align: center;
+}
+
+.dareset {
+    display: inline-block;
+    width: 50px;
+    height: 40px;
+    line-height: 40px;
+    margin: 0 2px 2px 0;
+    background-color: gray;
+    color: #FFFFFF;
+    font-size: 12px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.dareset-done {
+    background-color: red;
+}
+
+
+//------------------------------------------------------//
+
+
+
+</style>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<div id="toolbox_wrapper">
+    <div id="tools-box">    
+        TIMER
+        <div class="dareStopwatch">
+            <div id="errorMessage" class="alert alert-success text-center" role="error" style="display: none;">
+                <strong>DONE!</strong>
+            </div>
+            <div id="timercounter">
+                <h1 id="time">00:00</h1>
+            </div>
+            <div id="darecontrols">
+                <div id="inputArea" style="display: none;">
+                    <input type="number" id="minutes" min="0" max="59" step="1" value="0" size="2" maxlength="2"> : 
+                    <input type="number" id="seconds" min="0" max="59" step="1" value="0" size="2" maxlength="2">
+                </div>
+                <div id="startArea" style="display: none;">
+                    <div id="breakBtn">START</div>
+                </div>
+                <div id="quickTimerArea">
+                    <div id="quickbutton1Area">
+                        <div id="quickbutton1">30 sec</div>
+                    </div>
+                    <div id="quickbutton2Area">
+                        <div id="quickbutton2">60 sec</div>
+                    </div>
+                    <div id="quickbutton3Area">
+                        <div id="quickbutton3">2 min</div>
+                    </div> 
+                </div>
+                <div id="resetArea">
+                    <div id="refresh" style="display: none;">Reset</div>
+                </div>
+                <div id="pauseArea" style="display: none;">
+                    <div id="pauseBtn">Pause</div>
+                </div>
+                <div id="resumeArea" style="display: none;">
+                    <div id="resumeBtn">Restart</div>
+                </div>
+                <div id="switchTimerArea">
+                    <div id="switchTimerBtn">Custom</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<audio id="daresound" preload="auto">
+    <source src="https://darebee.com/audio/buzzer.ogg" type="audio/ogg">
+    <source src="https://darebee.com/audio/buzzer.mp3" type="audio/mpeg">
+</audio>
+<script>
+var intervalHandle;
+var secondsRemaining;
+var useQuickTimers = true;
+var audio = document.getElementById('daresound');
+
+function errorHide() { document.getElementById("errorMessage").style.display = "none"; }
+function resetPage() {
+   if(useQuickTimers){
+       showQuickTimers();
+   } else {
+       showCustomTimers();
+   }
+
+  jQuery('#minutes').val('');
+  jQuery('#seconds').val('');
+  
+  document.getElementById("pauseArea").style.display = "none";
+  document.getElementById("resumeArea").style.display = "none";
+  document.getElementById("refresh").style.display = "none";  
+  setTimeout(errorHide, 5000);
+}
+function showQuickTimers(){
+    useQuickTimers = true;
+    jQuery('#quickTimerArea').show();
+    jQuery('#inputArea').hide();
+    jQuery('#startArea').hide();
+    jQuery('#switchTimerArea').show();
+    jQuery('#switchTimerBtn').html('Custom');
+    document.getElementById("minutes").value = "";
+    document.getElementById("seconds").value = "";
+}
+function showCustomTimers(){
+    useQuickTimers = false;
+    jQuery('#quickTimerArea').hide();
+    jQuery('#inputArea').show();
+    jQuery('#startArea').show();
+    jQuery('#switchTimerArea').show();
+    jQuery('#switchTimerBtn').html('Quick');
+}
+function resumeCountdown() {
+    tick();
+    intervalHandle = setInterval(tick, 1000);
+    document.getElementById("resumeArea").style.display = "none";
+    document.getElementById("pauseArea").style.display = "block";
+}
+function pauseCountdown() {
+    clearInterval(intervalHandle);
+    document.getElementById("pauseArea").style.display = "none";
+    document.getElementById("resumeArea").style.display = "block";
+}
+function tick() { 
+    var timeDisplay = document.getElementById("time");
+    var min = Math.floor(secondsRemaining / 60);
+    var sec = secondsRemaining - (min * 60);
+    
+    if(min < 10) { min = "0" + min; }
+    if(sec < 10) { sec = "0" + sec; }
+    
+    var message = min + ":" + sec;
+    timeDisplay.innerHTML = message;
+    
+    if(secondsRemaining === 0) {
+        document.getElementById("errorMessage").innerHTML = "<strong>DONE!</strong>";
+        document.getElementById("errorMessage").setAttribute("class", "alert alert-success text-center");
+        audio.play();
+        clearInterval(intervalHandle);
+        resetPage();
+    }
+    secondsRemaining--;
+}
+function startCountdown() {
+    var minutes = document.getElementById("minutes").value;
+    var seconds = document.getElementById("seconds").value;
+    secondsRemaining = minutes * 60 + +seconds;
+    intervalHandle = setInterval(tick, 1000);
+    document.getElementById("inputArea").style.display = "none";
+    document.getElementById("quickTimerArea").style.display = "none";
+    document.getElementById("pauseArea").style.display = "block";
+    document.getElementById("refresh").style.display = "block";
+    jQuery('#switchTimerArea').hide();
+    jQuery('#startArea').hide();
+    audio.play();
+    audio.pause();
+}
+document.getElementById("refresh").onclick = function() {
+    clearInterval(intervalHandle);
+    document.getElementById("time").innerHTML = "00:00";
+    resetPage();
+}
+jQuery("#breakBtn").click(function() { startCountdown(); });
+jQuery("#pauseBtn").click(function() { pauseCountdown(); });
+jQuery("#resumeBtn").click(function() { resumeCountdown(); });
+jQuery('#quickbutton1').click(function() {
+    jQuery('#minutes').val('0');
+    jQuery('#seconds').val('30');
+    startCountdown();
+});
+jQuery('#quickbutton2').click(function() {
+    jQuery('#minutes').val('1');
+    jQuery('#seconds').val('0');
+    startCountdown();
+});
+jQuery('#quickbutton3').click(function() {
+    jQuery('#minutes').val('2');
+    jQuery('#seconds').val('0');
+    startCountdown();
+});
+jQuery('#switchTimerBtn').click(function(){
+    useQuickTimers = !useQuickTimers;
+    resetPage();
+});
+resetPage();
+
+</script>
