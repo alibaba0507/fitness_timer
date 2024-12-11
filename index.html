@@ -4,9 +4,46 @@
 <style>
 @import url('https://fonts.googleapis.com/css?family=Pathway+Gothic+One');
 @import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
-#timercounter{
-	display: grid;
+@media (prefers-color-scheme: dark) {
+    #timercounter {
+        background-color: #333333; /* Dark background */
+        color: #ffffff; /* Light text for contrast */
+    }
+
+    #quickbutton1, #quickbutton2, #quickbutton3, #switchTimerBtn {
+        background-color: #444444; /* Darker buttons for dark mode */
+        color: #ffffff; /* Light text */
+    }
+
+    #quickbutton1:hover, #quickbutton2:hover, #quickbutton3:hover, #switchTimerBtn:hover {
+        background-color: #555555; /* Slightly lighter for hover */
+    }
 }
+#timercounter {
+    display: grid;
+    background-color: #ffffff; /* Set a white background */
+    color: #141414; /* Set dark text for contrast */
+    padding: 10px; /* Add spacing inside the element */
+    border-radius: 5px; /* Optional: rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for better visibility */
+}
+#timercounter h1 {
+    color: #333333 !important; /* Ensure the timer text is visible */
+    font-size: 50px; /* Make it large for readability */
+    margin: 0 auto; /* Center-align within the grid */
+    text-align: center;
+}
+#quickbutton1, #quickbutton2, #quickbutton3, #switchTimerBtn {
+    background-color: #007BFF; /* Set a blue background for buttons */
+    color: #ffffff; /* White text for contrast */
+    border-radius: 5px; /* Optional: rounded button edges */
+    transition: background-color 0.3s ease; /* Optional: smooth hover effect */
+}
+
+#quickbutton1:hover, #quickbutton2:hover, #quickbutton3:hover, #switchTimerBtn:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
 /* Timer-related styles */
 #toolbox_wrapper {
     height: 30px;
